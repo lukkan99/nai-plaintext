@@ -2,7 +2,7 @@ import "./App.css";
 //import { downloadZip } from "client-zip";
 import FileSaver from "file-saver";
 export {}
-
+//npm run deploy
 function App() {
   const processFiles = (files: FileList) => {
     //const results: { name: string; input: string }[] = [];
@@ -23,6 +23,8 @@ function App() {
             const bbold = document.getElementById("bold") as HTMLInputElement;
             const iitalics = document.getElementById("italics") as HTMLInputElement;
 
+            text = text.replaceAll('\n','');
+
             let bold, italics;
             if (bbold.checked) bold = "'"
             else bold = '';
@@ -36,9 +38,9 @@ function App() {
             text = text.replaceAll('<em>',italics);
             text = text.replaceAll('</em>',italics);
 
-            text = text.replaceAll('</p><p>','\n');
+            text = text.replaceAll('</p>','\n');
             text = text.replaceAll('<br/>','\n');
-            text = text.replaceAll('<hr/><p>','\n***\n');
+            text = text.replaceAll('<hr/>','\n***\n');
             text = text.replaceAll('<p>','\n');
             /*text = text.replaceAll('</p>','');
             text = text.replaceAll('<div>','');
@@ -62,6 +64,8 @@ function App() {
             text = text.replaceAll(/<.*?>/gm,'');
             text = text.replaceAll('&gt;','>');
             text = text.replaceAll('&lt;','<');  
+            text = text.replaceAll('–','-');
+            text = text.replaceAll(' ','');
 
           text = text.replaceAll("\r", "\n"); // unify newline style
           text = text.replaceAll(/[^\S\n]+/gm, " "); // collapse multiple whitespace
@@ -84,7 +88,7 @@ function App() {
             const oneshot = document.getElementById("oneshot") as HTMLInputElement;
             let chapter = '***'
             if (oneshot.value === "notnormal") chapter = '⁂'
-            if (i !== sectors.length-1)str+= chapter + '\n';
+            if (i !== sectors.length-1)str = str.trim() + '\n' + chapter + '\n';
           }
           //
 
@@ -112,7 +116,7 @@ function App() {
           if (content === '')
               content = str;
           else 
-            content = content + '⁂\n' + str;
+            content = content + '\n⁂\n' + str;
           //results.push({ name: f.name, input: str });
         })
       );
