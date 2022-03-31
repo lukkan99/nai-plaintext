@@ -161,9 +161,9 @@ function App() {
         <br />
 
         <a href="https://www.reddit.com/user/Zermelane" target="_blank" rel="noreferrer">Original code by Zermelane</a>
-
-
-
+        <br />
+        <br />
+        Check out my <a href="https://rentry.co/lorebook-guide" target="_blank" rel="noreferrer">guide</a> too!
       </pre>
 
     </div>
