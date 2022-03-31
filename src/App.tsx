@@ -1,6 +1,7 @@
 import "./App.css";
 //import { downloadZip } from "client-zip";
 import FileSaver from "file-saver";
+export {}
 
 function App() {
   const processFiles = (files: FileList) => {
