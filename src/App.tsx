@@ -116,7 +116,7 @@ function App() {
           if (content === '')
               content = str;
           else 
-            content = content + '\n⁂\n' + str;
+            content = content.trim() + '\n⁂\n' + str;
           //results.push({ name: f.name, input: str });
         })
       );
