@@ -1,11 +1,12 @@
 import "./App.css";
-//import { downloadZip } from "client-zip";
+import { downloadZip } from "client-zip";
 import FileSaver from "file-saver";
 export {}
+//npm start
 //npm run deploy
 function App() {
   const processFiles = (files: FileList) => {
-    //const results: { name: string; input: string }[] = [];
+    const results: { name: string; input: string }[] = [];
     let name = ''
     let content = ''
     let count = 1
@@ -15,13 +16,25 @@ function App() {
         f.text().then((text) => {
           let str = '';
 
-          let sectors = text.split('<div class="userstuff">');
+          const oneshot = document.getElementById("oneshot") as HTMLInputElement;
+          const nonaph = document.getElementById("nonaph") as HTMLInputElement;
+          const bbold = document.getElementById("bold") as HTMLInputElement;
+          const iitalics = document.getElementById("italics") as HTMLInputElement;
+          let chnumber = 0;
+          let seper = '<div class="userstuff">';
+          let Spe = false;
+          if (text.includes('<div class="meta group">\n  <h2 class="heading">')) Spe = true;
+          if (Spe) seper = '<div class="meta group">\n  <h2 class="heading">'
+
+          let sectors = text.split(seper);
           for (var i = 1; i < sectors.length; i++) {
             let text = sectors[i];
-            text = text.split('</div>')[0];
+            let chaptername = '';
+            if (Spe)
+            {chaptername = text.split('</h2>')[0];
 
-            const bbold = document.getElementById("bold") as HTMLInputElement;
-            const iitalics = document.getElementById("italics") as HTMLInputElement;
+             text = text.split('<div class="userstuff">')[1];}
+            text = text.split('</div>')[0];
 
             text = text.replaceAll('\n','');
 
@@ -79,15 +92,17 @@ function App() {
           text = text.replace(/^\n+/, ""); // remove initial empty lines
           text = text.replaceAll(/\n+/g, "\n"); // remove other empty lines
 
-          const nonaph = document.getElementById("nonaph") as HTMLInputElement;
           if (nonaph.checked) text = text.replaceAll(/^[^a-z0-9]+$/gm, "***");
 
             str+= text;
 
 
-            const oneshot = document.getElementById("oneshot") as HTMLInputElement;
             let chapter = '***'
-            if (oneshot.value === "notnormal") chapter = '⁂'
+            if (oneshot.value === "notnormal") {
+              chapter = '⁂';
+              chnumber++;
+              if(Spe) results.push({ name: f.name.slice(0, -5).substring(0, 124) + ' - ' + chnumber + ' '+chaptername.replaceAll("/", "").substring(0, 124) + '.txt', input: text.trim() });
+            }
             if (i !== sectors.length-1)str = str.trim() + '\n' + chapter + '\n';
           }
           //
@@ -117,14 +132,22 @@ function App() {
               content = str;
           else 
             content = content.trim() + '\n⁂\n' + str;
-          //results.push({ name: f.name, input: str });
+            if (oneshot.value === "normal" || Spe === false) results.push({ name: f.name.slice(0, -5) + '.txt', input: str.trim() });
         })
       );
     });
-    Promise.all(processFiles).then(() => {
-      var blob = new Blob([content.trim()], {type: "text/plain;charset=utf-8"});
+    Promise.all(processFiles).then(() => {//
+      const mutiple = document.getElementById("mutiple") as HTMLInputElement;
+      if(mutiple.value === "mutipleval" && results.length >= 2)
 
-      FileSaver.saveAs(blob, name)
+      downloadZip(results)
+        .blob()
+        .then((blob) => {
+          FileSaver.saveAs(blob, '('+count+") ao3 stories.zip");
+        })
+      else      {var blob = new Blob([content.trim()], {type: "text/plain;charset=utf-8"});
+
+      FileSaver.saveAs(blob, name)}
     }
     );
   };
@@ -151,6 +174,11 @@ function App() {
   </select><br />
         &nbsp;&nbsp;&nbsp;&nbsp; Select *** for normal story. <br />
         &nbsp;&nbsp;&nbsp;&nbsp; Select ⁂ for collection of oneshots. 
+        <br />
+        Separate multiple stories with <select id="mutiple">
+    <option value="single">⁂ in a single txt file</option>
+    <option value="mutipleval">Multiple txt files</option>
+  </select><br />
       </pre>
       <p>Download story as HTML and put it here:</p>
       <input
