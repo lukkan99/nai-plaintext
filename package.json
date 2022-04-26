@@ -2,7 +2,7 @@
   "name": "dumb-module-reformatter",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://pume-p.github.io/ao3-datasetting/",
+  "homepage": "https://pume-p.github.io/nai-plaintext/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
