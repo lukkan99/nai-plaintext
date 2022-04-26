@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/nai-plaintext/static/css/main.5739ad41.chunk.css",
+    "main.js": "/nai-plaintext/static/js/main.77fc6796.chunk.js",
+    "main.js.map": "/nai-plaintext/static/js/main.77fc6796.chunk.js.map",
+    "runtime-main.js": "/nai-plaintext/static/js/runtime-main.66a2bbde.js",
+    "runtime-main.js.map": "/nai-plaintext/static/js/runtime-main.66a2bbde.js.map",
+    "static/js/2.b1ac6c77.chunk.js": "/nai-plaintext/static/js/2.b1ac6c77.chunk.js",
+    "static/js/2.b1ac6c77.chunk.js.map": "/nai-plaintext/static/js/2.b1ac6c77.chunk.js.map",
+    "static/js/3.03f47359.chunk.js": "/nai-plaintext/static/js/3.03f47359.chunk.js",
+    "static/js/3.03f47359.chunk.js.map": "/nai-plaintext/static/js/3.03f47359.chunk.js.map",
+    "index.html": "/nai-plaintext/index.html",
+    "static/css/main.5739ad41.chunk.css.map": "/nai-plaintext/static/css/main.5739ad41.chunk.css.map",
+    "static/js/2.b1ac6c77.chunk.js.LICENSE.txt": "/nai-plaintext/static/js/2.b1ac6c77.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.66a2bbde.js",
+    "static/js/2.b1ac6c77.chunk.js",
+    "static/css/main.5739ad41.chunk.css",
+    "static/js/main.77fc6796.chunk.js"
+  ]
+}
